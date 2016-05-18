@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="introduction.cours.androidstudio.introduction.MainActivity">
+    tools:context="introduction.cours.androidstudio.introduction.LoginActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:theme="@style/AppTheme">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -24,8 +24,7 @@
 
     <include layout="@layout/content_main" />
     <include layout="@layout/content_second" />
-
-
+    <include layout="@layout/activity_login" />
 
 
 </android.support.design.widget.CoordinatorLayout>

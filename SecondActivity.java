@@ -4,8 +4,11 @@ package introduction.cours.androidstudio.introduction;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -19,12 +22,15 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,7 +38,11 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+@TargetApi(Build.VERSION_CODES.GINGERBREAD)
+@SuppressLint("NewApi")
 public class SecondActivity extends Activity implements OnClickListener, LocationListener {
+    Button btnStop;
+    TextView textViewTime;
     private LocationManager lManager;
    // private String choix_source = "";
     private Location location;
@@ -52,6 +62,22 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
         requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 
         setContentView(R.layout.content_second);
+        btnStop = (Button) findViewById(R.id.btnStop);
+        textViewTime = (TextView) findViewById(R.id.textViewTime);
+        textViewTime.setText("00:00:10s");
+
+        final CounterClass timer = new CounterClass(10000,1000);
+
+        timer.start();
+
+        btnStop.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Auto-generate method stub
+                timer.cancel();
+                textViewTime.setText("Alerte Annulée !");
+            }
+        });
 
         lManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
        if (lManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
@@ -77,13 +103,43 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
 
         //On affecte un écouteur d'évènement aux boutons
        // findViewById(R.id.choix_source).setOnClickListener(this);
-        findViewById(R.id.confirmerDanger).setOnClickListener(this);
+
         findViewById(R.id.afficherCarte).setOnClickListener(this);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
+
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    @SuppressLint("NewApi")
+
+    public class CounterClass extends CountDownTimer {
+        public CounterClass(long millisInFuture, long countDownInterval) {
+            super(millisInFuture, countDownInterval);
+            //TODO auto-generate constructor stub
+        }
+
+        @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+        @SuppressLint("NewApi")
+
+        @Override
+        public void onTick(long millisUntilFinished) {
+
+            long millis = millisUntilFinished;
+            String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                    TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                    TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+            System.out.println(hms);
+            textViewTime.setText(hms);
+        }
+
+        @Override
+        public void onFinish() {
+            //TODO Auto-generated
+            textViewTime.setText("Coordonnées transmises");
+        }
+    }
     //Méthode déclencher au clique sur un bouton
     public void onClick(View v) {
         switch (v.getId()) {
@@ -113,7 +169,7 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
 
         ((TextView) findViewById(R.id.adresse)).setText("");
 
-        findViewById(R.id.confirmerDanger).setEnabled(true);
+
         findViewById(R.id.afficherCarte).setEnabled(false);
     }
 

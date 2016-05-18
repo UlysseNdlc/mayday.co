@@ -50,15 +50,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dip">
 
-        <Button android:layout_height="wrap_content"
-            android:id="@+id/confirmerDanger"
-            android:text="Confirmer le danger ?"
-            android:layout_width="110dip" />
-
-        <Button android:layout_height="wrap_content"
-            android:text="Afficher Carte"
-            android:layout_width="110dip"
-            android:id="@+id/afficherCarte" />
 
     </LinearLayout>
 
@@ -68,5 +59,29 @@
         android:layout_below="@+id/LinearLayout01"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dip" />
+    <Button
+        android:id="@+id/btnStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop"
+        android:layout_marginBottom="99dp"
+        android:layout_above="@+id/afficherCarte"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="200dp"
+        android:textSize="20dp" />
+
+    <Button android:layout_height="wrap_content"
+        android:text="Afficher Carte"
+        android:layout_width="110dip"
+        android:id="@+id/afficherCarte"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/btnStop"
+        android:layout_alignStart="@+id/btnStop" />
 
 </RelativeLayout>
