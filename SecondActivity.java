@@ -44,7 +44,7 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
     Button btnStop;
     TextView textViewTime;
     private LocationManager lManager;
-   // private String choix_source = "";
+    // private String choix_source = "";
     private Location location;
     private double latitude;
     private double longitude;
@@ -76,12 +76,15 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
                 //TODO Auto-generate method stub
                 timer.cancel();
                 textViewTime.setText("Alerte Annulée !");
+                longitude=0;
+                latitude=0;
+                btnStop.setVisibility(View.GONE);
             }
         });
 
         lManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-       if (lManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-           // choix_source = "NETWORK_PROVIDER";
+        if (lManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+            // choix_source = "NETWORK_PROVIDER";
             //On demande au service de localisation de nous notifier tout changement de position
             //sur la source (le provider) choisie, toute les minutes (60000millisecondes).
             //Le paramètre this spécifie que notre classe implémente LocationListener et recevra
@@ -102,7 +105,7 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
         reinitialisationEcran();
 
         //On affecte un écouteur d'évènement aux boutons
-       // findViewById(R.id.choix_source).setOnClickListener(this);
+        // findViewById(R.id.choix_source).setOnClickListener(this);
 
         findViewById(R.id.afficherCarte).setOnClickListener(this);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -138,18 +141,19 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
         public void onFinish() {
             //TODO Auto-generated
             textViewTime.setText("Coordonnées transmises");
+            btnStop.setVisibility(View.GONE);
         }
     }
     //Méthode déclencher au clique sur un bouton
     public void onClick(View v) {
         switch (v.getId()) {
-           // case R.id.choix_source:
-                //choisirSource();
-               // break;
-           // case R.id.confirmerDanger:
-               // afficherLocation();
-              // abonnementNetwork();
-                //break;
+            // case R.id.choix_source:
+            //choisirSource();
+            // break;
+            // case R.id.confirmerDanger:
+            // afficherLocation();
+            // abonnementNetwork();
+            //break;
             case R.id.afficherCarte:
                 Intent i = new Intent(SecondActivity.this, MapsActivity.class);
                 i.putExtra("my_latitude", latitude);
