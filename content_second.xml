@@ -63,9 +63,19 @@
         android:id="@+id/btnStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop"
+        android:text="Annuler"
         android:layout_marginTop="270dp"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginLeft="220dp"
+        />
+    <Button
+        android:id="@+id/btnConfirmer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirmer"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="60dp"
+        />
+
 
     <TextView
         android:id="@+id/textViewTime"
@@ -73,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="200dp"
-        android:textSize="20dp" />
+        android:textSize="15dp" />
 
     <Button android:layout_height="wrap_content"
         android:text="Afficher Carte"
@@ -82,5 +92,71 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="400dp"
         />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Incendie"
+        android:id="@+id/text_incendie"
+        android:textSize="10dp"
+        android:layout_below="@+id/imageButton"
+        android:layout_alignEnd="@id/imageButton" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Braquage"
+        android:id="@+id/text_otage"
+        android:textSize="10dp"
+        android:layout_below="@+id/imageButton2"
+        android:layout_alignEnd="@id/imageButton2" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Terrorisme"
+        android:id="@+id/text_terro"
+        android:textSize="10dp"
+        android:layout_below="@+id/imageButton3"
+        android:layout_alignEnd="@id/imageButton3" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Catastrophe Naturelle"
+        android:id="@+id/text_naturelle"
+        android:textSize="10dp"
+        android:layout_alignTop="@+id/text_terro"
+        android:layout_alignLeft="@+id/imageButton4"
+        android:layout_alignStart="@+id/imageButton4" />
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageButton"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="50dp"
+        android:src="@mipmap/ic_feu"
+        />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageButton2"
+        android:src="@mipmap/ic_cagoule"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="130dp"
+   />
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageButton3"
+        android:src="@mipmap/ic_terro"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="210dp" />
+
+    <ImageButton
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageButton4"
+        android:src="@mipmap/ic_naturelle"
+        android:layout_marginTop="270dp"
+        android:layout_marginLeft="290dp" />
 
 </RelativeLayout>

@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.content_main);
         txtMsg = (TextView) findViewById(R.id.txtMsg);
         btnNewMsg = (Button) findViewById(R.id.btnNewMsg);
+
     }
 
     @Override

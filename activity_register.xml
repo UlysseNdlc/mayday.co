@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="Last Name" />
+        android:hint="Nom de famille" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -25,7 +25,7 @@
         android:layout_below="@+id/etLastName"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="First Name" />
+        android:hint="Prénom" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -47,12 +47,12 @@
         android:layout_below="@+id/etEmail"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:hint="Password" />
+        android:hint="Mot de passe" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Enregistrer"
         android:id="@+id/bRegister"
         android:layout_below="@+id/etPassword"
         android:layout_centerHorizontal="true" />

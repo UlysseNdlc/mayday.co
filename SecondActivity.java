@@ -1,18 +1,10 @@
 package introduction.cours.androidstudio.introduction;
 
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -20,7 +12,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,9 +19,10 @@ import android.os.CountDownTimer;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,16 +30,33 @@ import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
 @TargetApi(Build.VERSION_CODES.GINGERBREAD)
 @SuppressLint("NewApi")
-public class SecondActivity extends Activity implements OnClickListener, LocationListener {
+public class SecondActivity  extends Activity implements OnClickListener, LocationListener  {
+
     Button btnStop;
+    Button btnConfirmer;
+    ImageButton btnIncendie;
+    ImageButton btnOtage;
+    ImageButton btnTerro;
+    ImageButton btnNaturelle;
+
     TextView textViewTime;
+    TextView textIncendie;
+    TextView textOtage;
+    TextView textTerro;
+    TextView textNaturelle;
+
     private LocationManager lManager;
     // private String choix_source = "";
     private Location location;
     private double latitude;
     private double longitude;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -63,6 +72,24 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
 
         setContentView(R.layout.content_second);
         btnStop = (Button) findViewById(R.id.btnStop);
+        btnConfirmer = (Button) findViewById(R.id.btnConfirmer);
+
+        btnIncendie= (ImageButton) findViewById(R.id.imageButton);
+        btnIncendie.setVisibility(View.GONE);
+        btnOtage= (ImageButton) findViewById(R.id.imageButton2);
+        btnOtage.setVisibility(View.GONE);
+        btnTerro= (ImageButton) findViewById(R.id.imageButton3);
+        btnTerro.setVisibility(View.GONE);
+        btnNaturelle= (ImageButton) findViewById(R.id.imageButton4);
+        btnNaturelle.setVisibility(View.GONE);
+        textIncendie = (TextView) findViewById(R.id.text_incendie);
+        textIncendie.setVisibility(View.GONE);
+        textTerro = (TextView) findViewById(R.id.text_terro);
+        textTerro.setVisibility(View.GONE);
+        textOtage= (TextView) findViewById(R.id.text_otage);
+        textOtage.setVisibility(View.GONE);
+        textNaturelle= (TextView) findViewById(R.id.text_naturelle);
+        textNaturelle.setVisibility(View.GONE);
         textViewTime = (TextView) findViewById(R.id.textViewTime);
         textViewTime.setText("00:00:10s");
 
@@ -76,12 +103,62 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
                 //TODO Auto-generate method stub
                 timer.cancel();
                 textViewTime.setText("Alerte Annulée !");
-                longitude=0;
-                latitude=0;
+                Toast.makeText(SecondActivity.this, "Alerte Annulée !", Toast.LENGTH_SHORT).show();
+                longitude = 0;
+                latitude = 0;
                 btnStop.setVisibility(View.GONE);
+                btnConfirmer.setVisibility(View.GONE);
+                //... on active le bouton pour afficher l'adresse
+                findViewById(R.id.afficherCarte).setEnabled(true);
+            }
+        });
+        btnConfirmer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //TODO Auto-generate method stub
+                timer.cancel();
+                Toast.makeText(SecondActivity.this, "Coordonnée transmise", Toast.LENGTH_SHORT).show();
+                textViewTime.setText("(Vous pouvez précisez la nature du danger)");
+                btnStop.setVisibility(View.GONE);
+                btnConfirmer.setVisibility(View.GONE);
+                btnIncendie.setVisibility(View.VISIBLE);
+                btnTerro.setVisibility(View.VISIBLE);
+                btnOtage.setVisibility(View.VISIBLE);
+                btnNaturelle.setVisibility(View.VISIBLE);
+                textIncendie.setVisibility(View.VISIBLE);
+                textOtage.setVisibility(View.VISIBLE);
+                textTerro.setVisibility(View.VISIBLE);
+                textNaturelle.setVisibility(View.VISIBLE);
+                //... on active le bouton pour afficher l'adresse
+                findViewById(R.id.afficherCarte).setEnabled(true);
             }
         });
 
+        btnIncendie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(SecondActivity.this, "Information transmise", Toast.LENGTH_SHORT).show();
+            }
+        });
+        btnOtage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(SecondActivity.this, "Information transmise", Toast.LENGTH_SHORT).show();
+            }});
+        btnTerro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(SecondActivity.this, "Information transmise", Toast.LENGTH_SHORT).show();
+            }});
+        btnNaturelle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Toast.makeText(SecondActivity.this, "Information transmise", Toast.LENGTH_SHORT).show();
+            }});
         lManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         if (lManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             // choix_source = "NETWORK_PROVIDER";
@@ -140,27 +217,30 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
         @Override
         public void onFinish() {
             //TODO Auto-generated
-            textViewTime.setText("Coordonnées transmises");
+            textViewTime.setText("Coordonnées transmises\n" +"(Vous pouvez précisez la nature du danger)");
             btnStop.setVisibility(View.GONE);
+            btnConfirmer.setVisibility(View.GONE);
+            btnIncendie.setVisibility(View.VISIBLE);
+            btnTerro.setVisibility(View.VISIBLE);
+            btnOtage.setVisibility(View.VISIBLE);
+            btnNaturelle.setVisibility(View.VISIBLE);
+            textIncendie.setVisibility(View.VISIBLE);
+            textOtage.setVisibility(View.VISIBLE);
+            textTerro.setVisibility(View.VISIBLE);
+            textNaturelle.setVisibility(View.VISIBLE);
+            //... on active le bouton pour afficher l'adresse
+            findViewById(R.id.afficherCarte).setEnabled(true);
         }
     }
     //Méthode déclencher au clique sur un bouton
     public void onClick(View v) {
         switch (v.getId()) {
-            // case R.id.choix_source:
-            //choisirSource();
-            // break;
-            // case R.id.confirmerDanger:
-            // afficherLocation();
-            // abonnementNetwork();
-            //break;
-            case R.id.afficherCarte:
+                        case R.id.afficherCarte:
                 Intent i = new Intent(SecondActivity.this, MapsActivity.class);
                 i.putExtra("my_latitude", latitude);
                 i.putExtra("my_longitude", longitude);
                 startActivity(i);
-
-                break;
+                            break;
             default:
                 break;
         }
@@ -262,7 +342,7 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
         //... on stop le cercle de chargement
         setProgressBarIndeterminateVisibility(false);
         //... on active le bouton pour afficher l'adresse
-        findViewById(R.id.afficherCarte).setEnabled(true);
+        //findViewById(R.id.afficherCarte).setEnabled(true);
         //... on sauvegarde la position
         this.location = location;
         //... on l'affiche
@@ -278,6 +358,7 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        HttpURLConnectionMayday http=new HttpURLConnectionMayday();
         lManager.removeUpdates(this);
     }
 
@@ -299,6 +380,7 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+
         lManager.removeUpdates(this);
         //... on stop le cercle de chargement
         setProgressBarIndeterminateVisibility(false);
@@ -351,4 +433,5 @@ public class SecondActivity extends Activity implements OnClickListener, Locatio
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
     }
+
 }
