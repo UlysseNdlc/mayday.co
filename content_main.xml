@@ -9,19 +9,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Cliquer pour Signaler un Danger !"
+        android:text="Cliquez pour Signaler un Danger !"
         android:id="@+id/txtMsg"
         android:layout_marginTop="151dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Alert !"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:text="!"
+        android:textSize="40dp"
         android:id="@+id/btnNewMsg"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="144dp" />
+        android:layout_marginBottom="144dp"
+        android:background = "@drawable/roundedbutton"
+
+        />
 
 </RelativeLayout>
