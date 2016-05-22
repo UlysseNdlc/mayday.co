@@ -12,7 +12,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -26,7 +25,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
@@ -217,7 +215,8 @@ public class SecondActivity  extends Activity implements OnClickListener, Locati
         @Override
         public void onFinish() {
             //TODO Auto-generated
-            textViewTime.setText("Coordonnées transmises\n" +"(Vous pouvez précisez la nature du danger)");
+            Toast.makeText(SecondActivity.this, "Coordonnée transmise", Toast.LENGTH_SHORT).show();
+            textViewTime.setText("(Vous pouvez précisez la nature du danger)");
             btnStop.setVisibility(View.GONE);
             btnConfirmer.setVisibility(View.GONE);
             btnIncendie.setVisibility(View.VISIBLE);
@@ -338,7 +337,7 @@ public class SecondActivity  extends Activity implements OnClickListener, Locati
         latitude=location.getLatitude();
         longitude=location.getLongitude();
         //Lorsque la position change...
-        Log.i("Tuto géolocalisation", "La position a changé.");
+        Log.i("", "La position a changé.");
         //... on stop le cercle de chargement
         setProgressBarIndeterminateVisibility(false);
         //... on active le bouton pour afficher l'adresse
@@ -364,7 +363,7 @@ public class SecondActivity  extends Activity implements OnClickListener, Locati
 
     public void onProviderDisabled(String provider) {
         //Lorsque la source (GSP ou réseau GSM) est désactivé
-        Log.i("Tuto géolocalisation", "La source a été désactivé");
+        Log.i("", "La source a été désactivé");
         //...on affiche un Toast pour le signaler à l'utilisateur
         Toast.makeText(SecondActivity.this,
                 String.format("La source \"%s\" a été désactivé", provider),
@@ -387,14 +386,14 @@ public class SecondActivity  extends Activity implements OnClickListener, Locati
     }
 
     public void onProviderEnabled(String provider) {
-        Log.i("Tuto géolocalisation", "La source a été activé.");
+        Log.i("", "La source a été activé.");
     }
 
     public void onStatusChanged(String provider, int status, Bundle extras) {
-        Log.i("Tuto géolocalisation", "Le statut de la source a changé.");
+        Log.i("", "Le statut de la source a changé.");
     }
 
-    @Override
+   /* @Override
     public void onStart() {
         super.onStart();
 
@@ -432,6 +431,6 @@ public class SecondActivity  extends Activity implements OnClickListener, Locati
         );
         AppIndex.AppIndexApi.end(client, viewAction);
         client.disconnect();
-    }
+    }*/
 
 }
